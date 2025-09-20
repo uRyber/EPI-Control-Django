@@ -1,124 +1,73 @@
-__Sistema de Empréstimos de EPI__
+# Sistema de Gestão de EPIs
 
--> Projeto full-stack desenvolvido em Spring Boot (Backend) e HMTL+JS (Frontend) com persistência em banco de dados relacional. Este sistema permite o gerenciamento de empréstimos de equipamentos por usuários e colaboradores.
+Este projeto é um sistema para a gestão de Equipamentos de Proteção Individual (EPIs), permitindo o cadastro de colaboradores e equipamentos, o registro de empréstimos e a visualização de relatórios.
 
-# Funcionalidades
+### Funcionalidades
 
-- Cadastro de Usuários e Colaboradores
-- Cadastro de Equipamentos
-- Registro de Empréstimos de equipamentos
-- Integração entre entidades com relacionamentos via chave estrangeira
+* **Dashboard/Home:** Uma página inicial para navegação.
+* **Cadastros:**
+    * **Colaboradores:** CRUD (Criar, Ler, Atualizar e Deletar) de colaboradores.
+    * **Equipamentos:** CRUD (Criar, Ler, Atualizar e Deletar) de equipamentos, com controle de quantidade em estoque.
+* **Ações:**
+    * **Controle de EPI:** Registro de empréstimos de equipamentos a colaboradores.
+* **Relatórios:**
+    * **Empréstimos:** Listagem completa de todos os empréstimos.
+* **Busca:** Campo de busca funcional em todas as listagens para facilitar a localização de dados.
 
-# Tecnologias Necessárias e Utilizadas
+### Requisitos para Rodar o Projeto
 
-*Backend*
-- VSCode
-- Java 17+
-- Spring Boot
-- MySQL
-- Maven
+Para executar o projeto, você precisa ter as seguintes ferramentas instaladas:
 
-*Frontend*
-- HTML
-- CSS
-- JS
+* **Python 3.x:** O projeto foi desenvolvido com uma versão recente do Python.
+* **pip:** O gerenciador de pacotes do Python.
+* **Django** Framework
 
-# Modelo Físico do Banco de Dados
+### Como Rodar o Projeto
 
-O banco de dados possui as seguintes tabelas:
-- Usuario
-- Colaborador
-- Equipamento
-- Emprestimo
+Colocando o projeto em funcionamento:
 
-<____________________________PASSO A PASSO PARA RODAR A APLICAÇÃO____________________________>
+1.  **Clone o repositório:**
+    Abra o VSCODE e abra terminal e execute o comando:
 
-1. CONFIGURAR O BANCO DE DADOS 
+    git clone https://github.com/uRyber/EPI-Control-Django.git
 
-1. 1.1 Acesse seu MySQL e crie o banco:
+2.  **Acesse a pasta do projeto:**
+  
+    cd EPI-Control-Django
 
-CREATE DATABASE epi;
-
-1. 1.2 Execute os comandos SQL fornecidos a seguir para criar as tabelas.
-*Comandos SQL para criação das tabelas*
-
-CREATE TABLE Colaborador (
-    id_colaborador INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    cpf CHAR(11) UNIQUE NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    senha VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE Usuario (
-    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    cpf CHAR(11) UNIQUE NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    senha VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE Equipamento (
-    id_equipamento INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    descricao TEXT,
-    quantidade_equipamento INT NOT NULL CHECK (quantidade_equipamento >= 0)
-);
-
-CREATE TABLE Emprestimo (
-    id_controle INT AUTO_INCREMENT PRIMARY KEY,
-    id_colaborador INT NOT NULL,
-    id_equipamento INT NOT NULL,
-    data_entrega DATE NOT NULL,
-    data_prevista_devolucao DATE NOT NULL,
-    data_devolucao DATE NULL,
-    status ENUM('Emprestado', 'Em uso', 'Fornecido', 'Devolvido', 'Danificado', 'Perdido') NOT NULL,
-    observacao_devolucao TEXT NULL,
+3.  **Crie e ative um ambiente virtual (recomendado):**
+    Isolar as dependências do projeto.
     
-    CONSTRAINT fk_colaborador FOREIGN KEY (id_colaborador) 
-        REFERENCES Colaborador (id_colaborador)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
+    python -m venv projeto_epi
 
-    CONSTRAINT fk_equipamento FOREIGN KEY (id_equipamento) 
-        REFERENCES Equipamento (id_equipamento)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
-);
+    # Ativa o ambiente virtual (no Windows)
+    venv\Scripts\activate
 
-________________________________________________________________________________________________________________________________________________________________________________________________________________________
+    # Ativa o ambiente virtual (no macOS/Linux)
+    source venv/bin/activate
 
-2. <-------------------- CLONAR REPOSITÓRIO -------------------->
+4.  **Instale as dependências:**
+    Com o ambiente virtual ativado, instale o Django.
+ 
+    pip install django
 
-2. 2.1 Com seu VS Code aberto abra o terminal e digite o seguinte comando para clonar o repositório
+5.  **Configure o banco de dados:**
+    O projeto utiliza o banco de dados padrão do Django, o SQLite. Você precisa executar as migrações para criar as tabelas no banco de dados.
 
-git clone https://github.com/Artrite/EPIControl.git
-cd EPIControl
+    python manage.py makemigrations
+    python manage.py migrate
 
-3. <-------------------- CONFIGURANDO O "application.properties" -------------------->
 
-3. 3.1 No caminho src/main/resources/application.properties, adicione ou edite com suas credenciais:
+6.  **Execute o servidor de desenvolvimento:**
+    Inicie o servidor local para acessar o projeto pelo navegador.
 
-spring.application.name=EPI
+    python manage.py runserver
 
-spring.jpa.show-sql=true
-spring.datasource.url=jdbc:mysql://localhost:3306/epi
-spring.datasource.driver-class-name=com.mysql.jdbc.Driver
-spring.datasource.username=root
-spring.datasource.password=*SUA SENHA*
 
-4. <-------------------- RODANDO O BACKEND -------------------->
+7.  **Acesse o sistema:**
+    Abra o seu navegador e acesse o endereço:
 
-4. 4.1 No caminho src/main/java/senai/EPI/EpiApplication.java, e clique no botão "Run" (Canto superior direito).
+    [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
-# OUTRA OPÇÃO
-4. 4.2 No terminal, execute:
 
-./mvnw spring-boot:run
-
-*A aplicação backend estará disponível em:*
-http://localhost:8080/
-
-5. <-------------------- RODANDO O FRONTEND -------------------->
-
-5. 5.1 No caminho EPIControl/FrontEnd/EPIFront/findAllUser.html, e clique no botão "Run" (Canto superior direito).
+O sistema estará pronto para uso.
