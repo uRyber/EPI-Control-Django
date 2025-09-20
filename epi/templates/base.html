@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'epi/base.css' %}">
+    <title>{% block title %}Sistema de EPI{% endblock %}</title>
+</head>
+<body>
+
+    <div class="header">
+        <div class="header-left">
+            <button onclick="location.href='/'">Home</button>
+        </div>
+        <div class="header-right">
+            <div class="user-name">{% if user.is_authenticated %}{{ user.username }}{% else %}undefined{% endif %}</div>
+            <div class="user-icon" title="Perfil">👤</div>
+        </div>
+    </div>
+
+    <div class="layout">
+        <div class="sidebar">
+            <div>
+                <div class="menu-section">
+                    <div class="menu-section-title">Cadastros</div>
+                    <div class="menu-item {% if 'colaboradores' in request.path %}active{% endif %}"><a href="{% url 'colaboradores_list' %}">Colaborador</a></div>
+                    <div class="menu-item {% if 'equipamentos' in request.path %}active{% endif %}"><a href="{% url 'equipamentos_list' %}">Equipamentos</a></div>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-section-title">Ação</div>
+                    <div class="menu-item {% if 'emprestimos' in request.path %}active{% endif %}"><a href="{% url 'emprestimos_list' %}">Controle de EPI</a></div>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-section-title">Relatórios</div>
+                    <div class="menu-item"><a href="{% url 'emprestimos_list' %}">Empréstimo</a></div>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-section-title">Configurações</div>
+                    <div class="menu-item">Perfil</div>
+                    <div class="menu-item">Sistema</div>
+                </div>
+            </div>
+
+            <button class="logout-btn">Sair</button>
+        </div>
+
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+</body>
+</html>

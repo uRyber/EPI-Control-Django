@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Colaboradores{% endblock %}
+
+{% block content %}
+<div class="list-container">
+    <h2>Colaboradores</h2>
+
+    <div class="list-actions">
+        <form method="get" class="search-form">
+            <input type="text" name="q" placeholder="Pesquisar pelo nome..." value="{{ request.GET.q }}">
+            <button type="submit">🔍</button>
+        </form>
+        <a href="{% url 'criar_colaborador' %}" class="btn-create">+ Criar</a>
+    </div>
+
+    {% if colaboradores %}
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th class="long-text-header">Email</th>
+                <th>CPF</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for colaborador in colaboradores %}
+            <tr>
+                <td>{{ colaborador.id }}</td>
+                <td>{{ colaborador.nome }}</td>
+                <td class="long-text">{{ colaborador.email }}</td>
+                <td>{{ colaborador.cpf }}</td>
+                <td class="actions">
+                    <div class="btn-group">
+                        <a href="{% url 'editar_colaborador' colaborador.id %}" class="btn-edit">Editar</a>
+                        <a href="{% url 'excluir_colaborador' colaborador.id %}" class="btn-delete">Excluir</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="no-results">Desculpe, mas não encontramos dados correspondentes à sua busca :(</p>
+    {% endif %}
+</div>
+{% endblock %}

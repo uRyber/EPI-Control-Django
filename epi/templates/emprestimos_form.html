@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Cadastro de EPI{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Cadastro</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message {{ message.tags }}">
+                {{ message }}
+                <span class="close-btn" onclick="this.parentElement.style.display='none';">x</span>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="{{ form.equipamento.id_for_label }}">Equipamento</label>
+            {{ form.equipamento }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.colaborador.id_for_label }}">Colaborador</label>
+            {{ form.colaborador }}
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="{{ form.data_entrega.id_for_label }}" style="margin-bottom: 13px; margin-top: 10px;">Data do Empréstimo</label>
+                {{ form.data_entrega }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.data_prevista_devolucao.id_for_label }}">Data Prev. da Devolução</label>
+                {{ form.data_prevista_devolucao }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.status.id_for_label }}">Status</label>
+            {{ form.status }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.condicoes.id_for_label }}">Condições do equipamento no empréstimo</label>
+            {{ form.condicoes }}
+        </div>
+
+        <button type="submit" class="btn-primary">Salvar</button>
+    </form>
+
+    <a href="{% url 'emprestimos_list' %}" class="btn-secondary">Voltar</a>
+</div>
+{% endblock %}

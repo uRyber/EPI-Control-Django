@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Equipamentos{% endblock %}
+
+{% block content %}
+<div class="list-container">
+    <h2>Equipamentos</h2>
+
+    <div class="list-actions">
+        <form method="get" class="search-form">
+            <input type="text" name="q" placeholder="Pesquisar pelo nome..." value="{{ request.GET.q }}">
+            <button type="submit">🔍</button>
+        </form>
+        <a href="{% url 'criar_equipamento' %}" class="btn-create">+ Cadastrar Novo</a>
+    </div>
+
+    {% if equipamentos %}
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th class="long-text-header">Descrição</th>
+                <th>Quant. Disponível</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for equipamento in equipamentos %}
+            <tr>
+                <td>{{ equipamento.id }}</td>
+                <td>{{ equipamento.nome }}</td>
+                <td class="long-text">{{ equipamento.descricao }}</td>
+                <td>{{ equipamento.quantidade_equipamento }}</td>
+                <td class="actions">
+                    <div class="btn-group">
+                        <a href="{% url 'editar_equipamento' equipamento.id %}" class="btn-edit">Editar</a>
+                        <a href="{% url 'excluir_equipamento' equipamento.id %}" class="btn-delete">Excluir</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="no-results">Desculpe, mas não encontramos dados correspondentes à sua busca :(</p>
+    {% endif %}
+</div>
+{% endblock %}
