@@ -1,0 +1,10 @@
+# Ignora arquivos de banco de dados e arquivos temporários
+*.sqlite3
+__pycache__/
+
+# Ignora a pasta do ambiente virtual
+venv/
+.venv/
+
+# Ignora arquivos de sistema
+.DS_Store
