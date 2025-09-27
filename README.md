@@ -41,10 +41,16 @@ Colocando o projeto em funcionamento:
     python -m venv projeto_epi
 
     # Ativa o ambiente virtual (no Windows)
-    venv\Scripts\activate
+    cd projeto_epi/Scripts/activate
 
     # Ativa o ambiente virtual (no macOS/Linux)
     source venv/bin/activate
+
+    # Ao final de ativar o  ambiente virtual volte 2 pastas
+
+    cd ..
+
+    cd ..
 
 4.  **Instale as dependências:**
     Com o ambiente virtual ativado, instale o Django.
