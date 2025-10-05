@@ -31,25 +31,34 @@
 
 body, html {
     height: 100%;
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
     color: var(--cor-texto-principal);
+}
+
+body {
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  color: var(--cor-texto-principal);
+  background: linear-gradient(120deg, #2c3e50, #4ca1af, #bdc3c7);
+  background-attachment: fixed;
 }
 
 /* --- Layout Principal --- */
 .header {
-    height: 50px;
-    background-color: var(--cor-header);
+    height: 60px;
+    background-color: #f5f7fa;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
-    border-bottom: 1px solid var(--borda-padrao);
+    padding: 0 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
+
 
 .header-left button {
     background: none;
     border: none;
-    font-size: 16px;
+    font-size: 24px;
     font-weight: bold;
     cursor: pointer;
     color: var(--cor-texto-principal);
@@ -84,14 +93,16 @@ body, html {
 }
 
 .sidebar {
-    width: 220px;
-    background-color: var(--cor-fundo-claro);
+    width: 240px;
+    background-color: #1f2d3d;
+    color: #fff;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-right: 1px solid var(--borda-padrao);
-    padding: 15px;
+    border-right: 1px solid #16222e;
+    padding: 20px;
 }
+
 
 .menu-section {
     margin-bottom: 20px;
@@ -102,39 +113,58 @@ body, html {
     margin-bottom: 5px;
 }
 
-.menu-item {
-    margin-left: 10px;
-    margin-bottom: 5px;
-    color: var(--cor-texto-principal);
-    cursor: pointer;
+.menu-item a {
+    color: #cfd8dc;
     text-decoration: none;
+    display: block;
+    padding: 8px 10px;
+    border-radius: 4px;
+    transition: 0.3s;
 }
 
-.menu-item:hover {
-    color: var(--cor-principal);
+.menu-item a:hover,
+.menu-item.active a {
+    background-color: #2c3e50;
+    color: #fff;
 }
 
 .logout-btn {
-    background-color: #f8d7da;
-    color: #721c24;
+    background-color: #c0392b;
+    color: white;
     border: none;
     padding: 10px;
     text-align: center;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #a93226;
 }
 
 /* CONTEÚDO */
 .content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  /* Mude esta linha para alinhar o conteúdo no topo */
-  align-items: flex-start; 
-  gap: 20px;
-  padding: 30px;
-  overflow-y: auto;
-  background-color: #fff;
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+tbody {
+    background-color: white;
+}
+
+.card {
+    background-color: #2c3e50;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.styled-table {
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 /* --- Componentes: Formulários e Botões --- */
@@ -142,7 +172,7 @@ body, html {
     max-width: 400px;
     margin: 40px auto;
     padding: 25px;
-    background: #fff;
+    background-color: #2c3e50;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     text-align: center;
@@ -151,6 +181,7 @@ body, html {
 .form-container h2 {
     margin-bottom: 20px;
     font-size: 22px;
+    color: white;
 }
 
 .form-container p {
@@ -162,7 +193,7 @@ body, html {
     display: block;
     margin-bottom: 6px;
     font-weight: 600;
-    color: #555;
+    color: #cccccc;
 }
 
 .form-group {
@@ -213,6 +244,7 @@ body, html {
     background: var(--cor-principal);
     color: white;
     border: none;
+    margin-top: 8px;
 }
 
 .btn-primary:hover {
@@ -222,7 +254,6 @@ body, html {
 .btn-secondary {
     background: #eee;
     color: var(--cor-texto-principal);
-    border: 1px solid var(--borda-padrao);
     margin-top: 8px;
 }
 
@@ -353,7 +384,7 @@ body, html {
     text-align: center;
     margin-top: 30px;
     font-size: 16px;
-    color: #666;
+    color: #ffffff;
 }
 
 /* --- Mensagens de Alerta --- */
@@ -387,6 +418,29 @@ body, html {
     font-size: 18px;
     line-height: 1;
 }
+.confirm-container {
+        align-items: center;
+    max-width: 500px;
+    margin: 100px auto; /* Centraliza verticalmente e horizontalmente */
+    padding: 30px;
+    background-color: #1f2d3d; /* Mesma cor da sidebar */
+    color: white;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .confirm-container h2 {
+        margin-bottom: 20px;
+        font-size: 20px;
+    }
+
+    .confirm-container form {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
 
 /* --- Responsividade para telas menores --- */
 @media (max-width: 768px) {
@@ -417,4 +471,5 @@ body, html {
         margin-top: 20px;
         padding: 15px;
     }
+
 }

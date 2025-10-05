@@ -50,3 +50,4 @@ class EmprestimoForm(forms.ModelForm):
             self.add_error('data_prevista_devolucao', "A data de devolução deve ser posterior à data de entrega.")
             
         return cleaned_data
+    

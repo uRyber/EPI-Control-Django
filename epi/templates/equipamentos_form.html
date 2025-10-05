@@ -35,8 +35,17 @@
         </div>
 
         <button type="submit" class="btn-primary">Salvar</button>
+        <a href="{% url 'equipamentos_list' %}" class="btn-secondary">Voltar</a>
     </form>
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="message {{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 
-    <a href="{% url 'equipamentos_list' %}" class="btn-secondary">Voltar</a>
 </div>
 {% endblock %}

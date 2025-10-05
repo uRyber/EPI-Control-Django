@@ -2,11 +2,14 @@
 {% block title %}Confirmação{% endblock %}
 
 {% block content %}
-<h2>Tem certeza que deseja excluir "{{ obj }}"?</h2>
+<div class="card confirm-container">
+  <h2>Tem certeza que deseja excluir "{{ obj }}"?</h2>
 
-<form method="post">
-  {% csrf_token %}
-  <button type="submit" class="btn-primary">Sim, excluir</button>
-  <a href="javascript:history.back()" class="btn-secondary">Cancelar</a>
-</form>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn-primary">Sim, excluir</button>
+    <a href="javascript:history.back()" class="btn-secondary">Cancelar</a>
+  </form>
+</div>
 {% endblock %}
+

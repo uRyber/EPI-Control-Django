@@ -3,6 +3,8 @@ from .models import Equipamento, Emprestimo, Colaborador
 from .forms import EquipamentoForm, EmprestimoForm, ColaboradorForm
 from django.db.models import Q
 
+
+
 def home(request):
     return render(request, 'base.html')
 
@@ -113,3 +115,4 @@ def excluir_emprestimo(request, id):
         emprestimo.delete()
         return redirect('emprestimos_list')
     return render(request, 'confirm_delete.html', {'obj': emprestimo})
+

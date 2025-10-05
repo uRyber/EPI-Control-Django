@@ -1,54 +1,55 @@
 {% extends 'base.html' %}
-{% load static %}
 
 {% block title %}Empréstimos{% endblock %}
 
 {% block content %}
 <div class="list-container">
-    <h2>Empréstimos</h2>
+    <div class="card">
+        <h2 style="color: white;">Empréstimos</h2>
 
-    <div class="list-actions">
-        <form method="get" class="search-form">
-            <input type="text" name="q" placeholder="Pesquisar pelo colaborador..." value="{{ request.GET.q }}">
-            <button type="submit">🔍</button>
-        </form>
-        <a href="{% url 'criar_emprestimo' %}" class="btn-create">+ Registrar Empréstimo</a>
+        <div class="list-actions">
+            <form method="get" class="search-form">
+                <input type="text" name="q" placeholder="Pesquisar pelo colaborador..." value="{{ request.GET.q }}">
+                <button type="submit">🔍</button>
+            </form>
+            <a href="{% url 'criar_emprestimo' %}" class="btn-create">+ Registrar Empréstimo</a>
+        </div>
+
+        {% if emprestimos %}
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Colaborador</th>
+                    <th class="long-text-header">Equipamento</th>
+                    <th>Data Entrega</th>
+                    <th>Data Prev. Devolução</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for emprestimo in emprestimos %}
+                <tr>
+                    <td>{{ emprestimo.id }}</td>
+                    <td>{{ emprestimo.colaborador }}</td>
+                    <td class="long-text">{{ emprestimo.equipamento }}</td>
+                    <td>{{ emprestimo.data_entrega|date:"d/m/Y" }}</td>
+                    <td>{{ emprestimo.data_prevista_devolucao|date:"d/m/Y" }}</td>
+                    <td>{{ emprestimo.status }}</td>
+                    <td class="actions">
+                        <div class="btn-group">
+                            <a href="{% url 'editar_emprestimo' emprestimo.id %}" class="btn-edit">Editar</a>
+                            <a href="{% url 'excluir_emprestimo' emprestimo.id %}" class="btn-delete">Excluir</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="no-results">Desculpe, mas não encontramos empréstimos correspondentes à sua busca :(</p>
+        {% endif %}
     </div>
-
-    {% if emprestimos %}
-    <table class="styled-table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Colaborador</th>
-                <th class="long-text-header">Equipamento</th>
-                <th>Data Entrega</th>
-                <th>Data Prev. Devolução</th>
-                <th>Status</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for emprestimo in emprestimos %}
-            <tr>
-                <td>{{ emprestimo.id }}</td>
-                <td>{{ emprestimo.colaborador }}</td>
-                <td class="long-text">{{ emprestimo.equipamento }}</td>
-                <td>{{ emprestimo.data_entrega|date:"d/m/Y" }}</td>
-                <td>{{ emprestimo.data_prevista_devolucao|date:"d/m/Y" }}</td>
-                <td>{{ emprestimo.status }}</td>
-                <td class="actions">
-                    <div class="btn-group">
-                        <a href="{% url 'editar_emprestimo' emprestimo.id %}" class="btn-edit">Editar</a>
-                        <a href="{% url 'excluir_emprestimo' emprestimo.id %}" class="btn-delete">Excluir</a>
-                    </div>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-    <p class="no-results">Desculpe, mas não encontramos empréstimos correspondentes à sua busca :(</p>
-    {% endif %}
 </div>
 {% endblock %}

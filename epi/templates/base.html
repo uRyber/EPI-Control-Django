@@ -5,16 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'epi/base.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>{% block title %}Sistema de EPI{% endblock %}</title>
 </head>
 <body>
 
     <div class="header">
         <div class="header-left">
-            <button onclick="location.href='/'">Home</button>
+            <button onclick="location.href='/'">EPI Control</button>
         </div>
         <div class="header-right">
-            <div class="user-name">{% if user.is_authenticated %}{{ user.username }}{% else %}undefined{% endif %}</div>
+            <div class="user-name">{% if user.is_authenticated %}{{ user.username }}{% else %}Perfil{% endif %}</div>
             <div class="user-icon" title="Perfil">👤</div>
         </div>
     </div>
@@ -24,24 +26,48 @@
             <div>
                 <div class="menu-section">
                     <div class="menu-section-title">Cadastros</div>
-                    <div class="menu-item {% if 'colaboradores' in request.path %}active{% endif %}"><a href="{% url 'colaboradores_list' %}">Colaborador</a></div>
-                    <div class="menu-item {% if 'equipamentos' in request.path %}active{% endif %}"><a href="{% url 'equipamentos_list' %}">Equipamentos</a></div>
+                    <div class="menu-item {% if 'colaboradores' in request.path %}active{% endif %}">
+                        <a href="{% url 'colaboradores_list' %}">
+                            <i class="fas fa-user" style="margin-right: 10px;"></i> Colaborador
+                        </a>
+                    </div>
+                    <div class="menu-item {% if 'equipamentos' in request.path %}active{% endif %}">
+                        <a href="{% url 'equipamentos_list' %}">
+                            <i class="fas fa-toolbox " style="margin-right: 10px;"></i> Equipamentos
+                        </a>
+                    </div>
                 </div>
 
                 <div class="menu-section">
                     <div class="menu-section-title">Ação</div>
-                    <div class="menu-item {% if 'emprestimos' in request.path %}active{% endif %}"><a href="{% url 'emprestimos_list' %}">Controle de EPI</a></div>
+                    <div class="menu-item {% if 'emprestimos' in request.path %}active{% endif %}">
+                        <a href="{% url 'emprestimos_list' %}">
+                            <i class="fas fa-hand-holding" style="margin-right: 10px;"></i> Controle de EPI
+                        </a>
+                    </div>
                 </div>
 
                 <div class="menu-section">
                     <div class="menu-section-title">Relatórios</div>
-                    <div class="menu-item"><a href="{% url 'emprestimos_list' %}">Empréstimo</a></div>
+                    <div class="menu-item">
+                        <a href="{% url 'emprestimos_list' %}">
+                            <i class="fas fa-file-alt" style="margin-right: 10px;"></i> Empréstimo
+                        </a>
+                    </div>
                 </div>
 
                 <div class="menu-section">
                     <div class="menu-section-title">Configurações</div>
-                    <div class="menu-item">Perfil</div>
-                    <div class="menu-item">Sistema</div>
+                    <div class="menu-item">
+                        <a href="#">
+                            <i class="fas fa-user-cog" style="margin-right: 10px;"></i> Perfil
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="#">
+                            <i class="fas fa-cogs" style="margin-right: 10px;"></i> Sistema
+                        </a>
+                    </div>
                 </div>
             </div>
 
